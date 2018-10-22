@@ -22,7 +22,7 @@ module.exports = (app) => {
 
   app.get('/api/logout', (req, res) => {
     req.logout()
-    res.send(req.user)
+    res.send(req.user)  //empty response, no longer have the user
   })
 
 }
