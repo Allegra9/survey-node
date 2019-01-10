@@ -11,8 +11,11 @@ module.exports = app => {
       description: "$5 for 5 credits",
       source: req.body.id //the charge token
     });
-    console.log(charge); //charge obejct
+    //console.log(charge); //charge obejct
+    //then we update the user's credits:
+    req.user.credits += 5;
+    const user = await req.user.save();
+
+    res.send(user);
   });
 };
-
-//then we need to update the user's number of credits
