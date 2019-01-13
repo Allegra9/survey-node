@@ -5,7 +5,8 @@ import Payments from "./Payments";
 
 class Header extends Component {
   renderContent = () => {
-    switch (this.props.auth) {
+    const { auth } = this.props;
+    switch (auth) {
       case null:
         return;
       case false:
@@ -16,10 +17,11 @@ class Header extends Component {
         );
       default:
         return [
-          <li key={Math.random()}>
+          <li key="1">
             <Payments />
           </li>,
-          <li key={Math.random()}>
+          <li style={{ margin: "0 20px" }}>Credits: {auth.credits}</li>,
+          <li key="3">
             <a href="/api/logout">Logout</a>
           </li>
         ];
