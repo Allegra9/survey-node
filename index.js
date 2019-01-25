@@ -5,6 +5,7 @@ const passport = require("passport");
 const bodyParser = require("body-parser");
 const keys = require("./config/keys");
 require("./models/User"); //must run before passport
+require("./models/Survey");
 require("./services/passport");
 
 mongoose.connect(
