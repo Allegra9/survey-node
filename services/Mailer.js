@@ -7,6 +7,7 @@ class Mailer extends helper.Mail {
   constructor({ subject, recipients }, content) {
     super(); //to execute whatevs on the Mail class that we extending
 
+    this.sgApi = sendgrid(keys.sendGridKey); //passing API key here
     this.from_email = new helper.Email("no-reply@emaily.com");
     this.subject = subject;
     this.body = new helper.Content("text/html", content);
@@ -38,6 +39,17 @@ class Mailer extends helper.Mail {
     trackingSettings.setClickTracking(clickTracking);
     this.addTrackingSettings(trackingSettings);
   };
+
+  async send() {
+    const request = sgApi.emptyRequest({
+      method: "POST",
+      path: "/v3/mail/send",
+      body: this.toJSON()
+    });
+
+    const response = this.sgApi.API(request); //sends it off to sendgrid
+    return response;
+  }
 }
 module.exports = Mailer;
 
